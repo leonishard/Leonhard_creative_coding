@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Mighty BALL!</title>
+
+    <!-- used to link the css document to the html document -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- from font awesome so that i can add logos to my website -->
+    <script src="https://kit.fontawesome.com/4b76c8371a.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Hide sections by default */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Fix for mobile menu */
+        .navbar__toggle {
+            display: none;
+        }
+
+        @media screen and (max-width: 960px) {
+            .navbar__toggle {
+                display: block;
+                cursor: pointer;
+            }
+        }
+
+        /* Question display effects */
+        .question-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #09ede5;
+            padding: 30px 40px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            text-align: center;
+            z-index: 10000;
+            opacity: 0;
+            scale: 0.5;
+            transition: all 0.5s ease;
+            border: 3px solid #09ede5;
+            box-shadow: 0 0 30px #09ede5;
+            max-width: 80%;
+            word-wrap: break-word;
+            font-family: "PixelFont", Arial, sans-serif;
+            pointer-events: none;
+        }
+
+        .question-display.show {
+            opacity: 1;
+            scale: 1;
+        }
+
+        .question-display.hide {
+            opacity: 0;
+            scale: 0.5;
+        }
+
+        /* Background flash effect */
+        .flash-effect {
+            animation: backgroundFlash 2s ease-in-out;
+        }
+
+        @keyframes backgroundFlash {
+            0% { background-color: #09ede5; }
+            25% { background-color: #09ed46; }
+            50% { background-color: #ed0946; }
+            75% { background-color: #4609ed; }
+            100% { background-color: #09ede5; }
+        }
+
+        /* Sparkle effect */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkleAnim 1s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Fix for any border issues */
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- "&nbsp;" is used to add spaced bettwen text -->
+<nav class="navbar">
+    <div class="navbar__container">
+        <!-- font awesome for bomb -->
+        <div id="navbar__logo" onclick="showSection('home')"><i class="fa-sharp fa-solid fa-bomb">&nbsp;</i> Magic 8 Ball</div>
+
+        <!-- this makes the navbar usable on mobile devices -->
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <!-- all the elements that are in the navbar -->
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <div class="navbar__links" onclick="showSection('home')"> <i class="fa-sharp fa-solid fa-house">&nbsp;</i> Home </div>
+            </li>
+            <li class="navbar__item">
+                <div class="navbar__links" onclick="showSection('lore')"> Lore </div>
+            </li>
+            <li class="navbar__item">
+                <a href="https://www.amazon.de/-/en/Tobar-21021-Magic-Ball-Number/dp/B00N1UEQ5G/ref=sr_1_2?crid=2ABQF0JGFEPFS&keywords=magic+8+ball&qid=1673292019&sprefix=magic+8+ball%2Caps%2C92&sr=8-2" class="navbar__links"> Products </a>
+            </li>
+
+            <!-- want to use a button here therefore it is "btn" and not item -->
+            <li class="navbar__btn">
+                <div class="button" onclick="showSection('home')"> sign up </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HOME SECTION: 8 ball inputs code-->
+<div id="home-section" class="section active">
+    <div class="page-body">
+        <!-- 8 ball button code-->
+        <div class="ball-button">
+            <img id='magic-ball' src="images/8 ball picture.png" alt="Mighty Ball of Knowledge" width="300px" height="300px" class="ball-image" onclick="showmessage()">
+        </div>
+
+        <!-- the bar where you write the message that will be shown on screen -->
+        <div class="input-place">
+            <input type="text" id="clear" placeholder="Ask me anything!">
+        </div>
+    </div>
+
+    <!-- Question display popup -->
+    <div id="question-popup" class="question-display">
+        <div id="question-text"></div>
+    </div>
+</div>
+
+<!-- LORE SECTION: informational text regarding magic 8 balls -->
+<div id="lore-section" class="section">
+    <div class="container">
+        <div class="body-of-text">
+            <p>The Magic 8 Ball is a toy used for fortune-telling or seeking advice.
+                It is a spherical plastic ball with a window on one side, filled with a
+                blue liquid and a floating white plastic die with various responses printed
+                on its surface. To use the toy, a person asks a yes-or-no question, then shakes
+                the ball and waits for the die to float to the top of the liquid and settle in the
+                window, revealing the response.</p>
+
+            <br>
+
+            <p>The Magic 8 Ball was invented in the 1950s by Albert
+                C. Carter and Abe Bookman, both of whom worked for the company
+                Alabe Crafts. Carter is credited with coming up with the idea
+                for the toy, while Bookman developed the methods for mass-producing it.
+                The Magic 8 Ball was first sold in stores in the United States in the mid-1950s,
+                and it quickly became a popular novelty item.</p>
+
+            <br>
+
+            <p>Over the years, the Magic 8 Ball has become a cultural icon and has been featured
+                in numerous TV shows, movies, and video games. It has also inspired the creation of
+                numerous knock-offs and imitators. Despite its enduring popularity, the Magic 8 Ball
+                has faced some criticism over the years, with some people arguing that it promotes
+                superstitious thinking and encourages people to rely on it for important decision-making
+                rather than using their own judgment.</p>
+        </div>
+
+        <div class="eight-ball-images">
+            <img src="images/Magic-8-Ball-103.jpg" alt="A description of the image" width="400" height="300">
+        </div>
+    </div>
+</div>
+
+<!-- used to implement java script into my document -->
+<script src="app.js"></script>
+</body>
+
+<!-- the script tells html to use java script -->
+<script>
+
+    // Function to show different sections
+    function showSection(sectionName) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Show the selected section
+        if (sectionName === 'home') {
+            document.getElementById('home-section').classList.add('active');
+        } else if (sectionName === 'lore') {
+            document.getElementById('lore-section').classList.add('active');
+        }
+
+        // Close mobile menu after selection
+        const menu = document.querySelector('.navbar__menu');
+        const mobileMenuToggle = document.getElementById('mobile-menu');
+        if (menu && menu.classList.contains('active')) {
+            menu.classList.remove('active');
+            mobileMenuToggle.classList.remove('is-active');
+        }
+    }
+
+    // Mobile menu toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navbarMenu = document.querySelector('.navbar__menu');
+
+        if (mobileMenu && navbarMenu) {
+            mobileMenu.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('is-active');
+            });
+        }
+    });
+
+    // this makes the magic 8 ball a button and when it is clicked it executes the following functions
+    // it needs the const so that it knows what it is looking for
+    const magicBall = document.getElementById("magic-ball");
+    if (magicBall) {
+        magicBall.addEventListener("click", getResult);
+        magicBall.addEventListener("click", showMessage);
+    }
+
+    const inputPlace = document.getElementsByClassName("input-place")[0];
+
+    // this gives a number between 1-8 and depending on the number it will give me a different outcome this uses java script
+    function getResult() {
+        const randomNumber = Math.floor(Math.random() * 8) + 1;
+
+// depending on the random number generated it shows one of the following images
+// the way it changes the image is by changing the source of the image depending on the random number that is picked
+        if(randomNumber === 1) {
+            magicBall.src = "images/yes.png"
+        }
+        else if(randomNumber === 2) {
+            magicBall.src = "images/no.png"
+        }
+        else if(randomNumber === 3) {
+            magicBall.src = "images/askLater.png"
+        }
+        if(randomNumber === 4) {
+            magicBall.src = "images/cannotNow.png"
+        }
+        if(randomNumber === 5) {
+            magicBall.src = "images/mostLike.png"
+        }
+        if(randomNumber === 6) {
+            magicBall.src = "images/noDoubt.png"
+        }
+        if(randomNumber === 7) {
+            magicBall.src = "images/outlookGood.png"
+        }
+        if(randomNumber === 8) {
+            magicBall.src = "images/saysNo.png"
+        }
+    }
+
+    // displays the message the user has written
+    function showMessage() {
+        const input = document.getElementById("clear");
+        alert("The Magic 8 Ball has taken your question into consideration: " + input.value);
+    }
+
+</script>
+
+</html>
