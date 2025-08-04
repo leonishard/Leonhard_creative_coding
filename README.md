@@ -1,6 +1,6 @@
 # Magic 8-Ball Website 🎱
 
-This is a creative coding project that brings the classic **Magic 8-Ball** experience to your browser. Ask it any yes-or-no question and receive a mysterious, randomized answer just like the original toy.
+This is a creative coding project that brings the classic **Magic 8-Ball** experience to your browser. Ask it any yes or no question and receive a mysterious, randomized answer just like the original toy.
 
 In addition to the interactive 8-Ball feature, the site includes a **Lore** section, where you can explore the origins and cultural history of the Magic 8-Ball.
 
